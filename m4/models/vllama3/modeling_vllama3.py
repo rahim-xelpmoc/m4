@@ -27,7 +27,7 @@ import torch.nn.functional as F
 import torch.utils.checkpoint
 from torch import nn
 from torch.nn import CrossEntropyLoss
-from transformers import AutoConfig, AutoModel, AutoModelForCausalLM
+from transformers import AutoConfig, AutoModel, AutoModelForCausalLM,GenerationMixin
 from transformers.activations import ACT2FN
 from transformers.cache_utils import Cache, DynamicCache, StaticCache
 from transformers.modeling_attn_mask_utils import AttentionMaskConverter
@@ -1480,7 +1480,7 @@ class VLlama3Model(VLlama3PreTrainedModel):
         return causal_mask
 
 
-class VLlama3ForCausalLM(VLlama3PreTrainedModel):
+class VLlama3ForCausalLM(VLlama3PreTrainedModel,GenerationMixin):
     _tied_weights_keys = ["lm_head.weight"]
 
     def __init__(self, config, vision_model=None):
