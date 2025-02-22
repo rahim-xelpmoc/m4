@@ -1064,7 +1064,7 @@ class VLlama3Model(VLlama3PreTrainedModel):
             partially_freeze=config.freeze_text_layers,
             padding_idx=self.padding_idx,
         )
-
+        self.out_additional_features=config.additional_vocab_size
         # Load an uninitialized model and later in from_pretrained will load the pre-trained model -
         # this solves the losing of weights in `from_pretrained` on the main model
         # init vision model
